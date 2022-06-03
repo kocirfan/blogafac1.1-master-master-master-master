@@ -24,7 +24,7 @@ public class ProductController {
 
     //dto
     @PostMapping("/products")
-    public ProductDTO createPost(@RequestBody ProductDTO productDTO){
+    public ProductDTO createProduct(@RequestBody ProductDTO productDTO){
         
         productService.createProduct(productDTO);
         return productDTO;
@@ -32,25 +32,25 @@ public class ProductController {
 
     //dto
     @GetMapping("/products")
-    public List<ProductDTO> getAllPosts() {
+    public List<ProductDTO> getAllProduct() {
         List<ProductDTO> productDTO = (List<ProductDTO>) productService.getAllProduct();
         return productDTO;
     }
 
     @GetMapping("/products/{id}")
-    public ResponseEntity<ProductDTO> getPostById(@PathVariable Long id){
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id){
         List<ProductDTO> productDTO = (List<ProductDTO>) productService.getAllProduct();
         return ResponseEntity.ok(productDTO.get(0));
     }
 
     @PutMapping("/products/{id}")
-    public ResponseEntity<ProductDTO> updatePost(@PathVariable Long id, @RequestBody ProductDTO productDetails){
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDetails){
         productService.updateProduct(id, productDetails);
         return ResponseEntity.ok(productDetails);
     }
 
     @DeleteMapping("/products/{id}")
-    public ResponseEntity<Map<String, Boolean>> deletePost(@PathVariable Long id){
+    public ResponseEntity<Map<String, Boolean>> deleteProduct(@PathVariable Long id){
         productService.deleteProduct(id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("silindi", Boolean.TRUE);

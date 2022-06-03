@@ -37,17 +37,23 @@ parentIds();
 async function getProductData() {
     let url = "http://localhost:8080/auth/v1/product/products";
     try {
-      let res = await fetch(url);
+      let res = await fetch(url );
       return await res.json();
     } catch (error) {
       console.log(error);
     }
-  }
-  async function renderProduct() {
+}
+
+async function renderProduct(event) {
     let products = await getProductData();
+    
+    // products.map(getsimdiID);
+    // function getsimdiID(simdiA){
+    //   IDA = simdiA.id;
     let html = "";
+    
     products.forEach((product) => {
-      
+     
       console.log(product);
       let htmlSegment = ` 
       
@@ -62,7 +68,8 @@ async function getProductData() {
             
             <div class="col-6 ">
               <div class="col-12 bg-dark text-white mb-3">${product.category}</div>
-             <div class="text-uppercase"><a href=${"productDetail.html/" + product.id}> ${product.name}</a>
+              <li><a id="basac"href=${"productDetail.html?id=" +  product.id}> ${product.name}</a></li>
+            
              <ul>
                 <li>
                   ${product.description}
@@ -75,10 +82,17 @@ async function getProductData() {
         `;
       
     html += htmlSegment;
-});
 
-let container = document.querySelector("#product");
-container.innerHTML = html;
+   
+    
+    });
+
+
+    let container = document.querySelector("#product");
+    container.innerHTML = html;
+    
+    event.preventDefaul()
+ 
 }
 
 renderProduct();
