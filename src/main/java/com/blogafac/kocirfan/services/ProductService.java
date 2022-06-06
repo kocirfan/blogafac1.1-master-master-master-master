@@ -4,6 +4,7 @@ import com.blogafac.kocirfan.entity.*;
 import com.blogafac.kocirfan.entity.dto.CategoryDTO;
 import com.blogafac.kocirfan.entity.dto.PostDTO;
 import com.blogafac.kocirfan.entity.dto.ProductDTO;
+import com.blogafac.kocirfan.exception.ResourceNotFoundException;
 import com.blogafac.kocirfan.repository.ProductRepository;
 import com.blogafac.kocirfan.services.IServices.IProductService;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
@@ -120,6 +121,9 @@ public class ProductService implements IProductService {
 //////////////////////////////////////////////
     @Override
     public Product getProduct(long id) {
-        return null;
+        return productRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
     }
+
 }
