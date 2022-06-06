@@ -41,11 +41,7 @@ public class CategoryController {
         return categoryDTO1;
     }
 
-//    @GetMapping("/categories/parents")
-//    public List<CategoryDTO> getBySelectParentId(int  parentId  ){
-//        List<CategoryDTO> categoryDTOS =  (List<CategoryDTO>) categoryService.getBySelectParentId(parentId);
-//        return categoryDTOS;
-//    }
+
 
 
     @GetMapping("/categories/{id}")
@@ -71,4 +67,11 @@ public class CategoryController {
         return ResponseEntity.ok(response);
     }
 
+
+
+    //    @GetMapping("/categories/parents")
+//    public List<CategoryDTO> getBySelectParentId(int  parentId  ){
+//        List<CategoryDTO> categoryDTOS =  (List<CategoryDTO>) categoryService.getBySelectParentId(parentId);
+//        return categoryDTOS;
+//    }
 }

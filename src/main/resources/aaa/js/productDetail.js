@@ -3,7 +3,7 @@
 
 
 async function getProductDataDetail () {
-        let url = "http://localhost:8080/auth/v1/product/products/"
+        let url = "http://localhost:8080/auth/v1/product/products/?id="
         try {
           let res = await fetch(url);
           return await res.json();
@@ -18,13 +18,13 @@ async function getProductDataDetail () {
         function getID(simdi , event ){
           ID = simdi.id;
           //console.log(ID)
-          fetch("http://localhost:8080/auth/v1/product/products/" + ID).then(
+          fetch("http://localhost:8080/auth/v1/product/products/?id=" + ID).then(
             response  => response.json()
           ).then(data => {
             data.forEach(dt =>{
               console.log(dt.id)
               let html = "";
-              if(dt.id == dt.id ){
+           if(ID == dt.id){
                 let htmlSegment = ` 
           
                 <div class="row">
@@ -37,29 +37,44 @@ async function getProductDataDetail () {
                       </div>
                       
                       <div class="col-6 ">
-                        <div class="col-12 bg-dark text-white mb-3">${dt}</div>
+                        <div class="col-12 bg-dark  mb-3"><a class=" text-white stretched-link"  href="#">${dt.category.name} </a>
+                      
+                        </div>
                        <div class="text-uppercase"> ${dt.name}
                        <ul>
                           <li>
                             ${dt.description}
                           </li>
                        </ul>
+                       <div></div>
+                       <button class="btn btn-success btn-sm"><a class="text-white"href="sepet.html">SEPETE EKLE</a> </button>
                     </div>  
                     </div>
                   </div> 
                </div>  
                   `;html += htmlSegment;
                   
+              }else{
+                return null
               }
               let container = document.querySelector("#productDetail");
               container.innerHTML = html;
               
             })
           })
-          event.preventDefault();
+         event.preventDefault();
         }
 
         
     }
     
     renderProductDetail();
+
+
+
+    /* 
+    
+    bilgisayar: https://productimages.hepsiburada.net/s/199/1500/110000170364823.jpg
+    telefon: https://productimages.hepsiburada.net/s/32/500/10352568139826.jpg
+    
+    */

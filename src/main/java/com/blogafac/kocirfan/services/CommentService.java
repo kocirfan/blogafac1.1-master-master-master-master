@@ -33,6 +33,7 @@ public class CommentService implements ICommentServices {
     private PostService postService;
 
 
+
     public CommentService(CommentRepository commentRepository, UserService userService,
                           PostService postService) {
         this.commentRepository = commentRepository;
@@ -120,6 +121,17 @@ public class CommentService implements ICommentServices {
         }
         return listDTO;
     }
+
+
+
+
+
+
+
+
+
+
+
     //getcomment şimdi
 //    public List<CommentResponse> getAllCommentsWithParam(Optional<Long> userId, Optional<Long> postId) {
 //        List<Comment> comments;

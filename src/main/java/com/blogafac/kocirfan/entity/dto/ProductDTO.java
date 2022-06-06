@@ -24,5 +24,6 @@ public class ProductDTO {
     CategoryDTO categoryDTO;
     Category category;
     String image;
-    int parentId;
+    int parentId;Long orderId;
+    Double price;
 }

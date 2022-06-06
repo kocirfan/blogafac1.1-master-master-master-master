@@ -67,14 +67,17 @@ async function renderProduct(event) {
             </div>
             
             <div class="col-6 ">
-              <div class="col-12 bg-dark text-white mb-3">${product.category}</div>
+              <div class="col-12 bg-dark text-white mb-3"><a class=" text-white stretched-link"  href="#">${product.category.name} </a></div>
               <li><a id="basac"href=${"productDetail.html?id=" +  product.id}> ${product.name}</a></li>
+              <li>${product.price}</li>
             
              <ul>
                 <li>
                   ${product.description}
                 </li>
              </ul>
+
+             <div class="mt-5"><button class="btn btn-success btn-sm"><a class="text-white"href="sepet.html">SEPETE EKLE</a> </button></div>
           </div>  
           </div>
         </div> 
@@ -91,7 +94,7 @@ async function renderProduct(event) {
     let container = document.querySelector("#product");
     container.innerHTML = html;
     
-    event.preventDefaul()
+    //event.preventDefaul()
  
 }
 

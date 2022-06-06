@@ -65,6 +65,7 @@ public class ProductService implements IProductService {
                .image(productImages)
                .name(productDTO.getName())
                .category(new Category())
+               .price(product.getPrice())
                .build();
 
 //        product.setId(product.getId());
@@ -115,5 +116,10 @@ public class ProductService implements IProductService {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
+    }
+//////////////////////////////////////////////
+    @Override
+    public Product getProduct(long id) {
+        return null;
     }
 }

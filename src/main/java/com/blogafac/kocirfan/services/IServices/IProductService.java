@@ -7,6 +7,7 @@ import com.blogafac.kocirfan.entity.dto.PostDTO;
 import com.blogafac.kocirfan.entity.dto.ProductDTO;
 import org.springframework.http.ResponseEntity;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Map;
 
@@ -31,4 +32,6 @@ public interface IProductService {
     public ResponseEntity<Map<String, Boolean>> deleteProduct(Long id);
 
    // public  List<ProductDTO> findByUserId(String user,Long userId);
+
+    Product getProduct(@Min(value = 1L, message = "Invalid product ID.") long id);
 }

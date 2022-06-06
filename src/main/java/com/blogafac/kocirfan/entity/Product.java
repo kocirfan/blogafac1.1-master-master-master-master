@@ -34,9 +34,15 @@ public class Product {
     Category category;
 
 
+
+
     @Temporal(TemporalType.TIME)
     Date createDate;
 
     @Column(name = "product_images")
     String image;
+
+    @Column
+    Double price;
+
 }
