@@ -47,7 +47,7 @@ async function getProductDataDetail () {
                           </li>
                        </ul>
                        <div></div>
-                       <button class="btn btn-success btn-sm"><a class="text-white"href="sepet.html">SEPETE EKLE</a> </button>
+                       <button id="sepetPost" class="btn btn-success btn-sm"><a class="text-white"href="${"sepet.html?id=" +  dt.id}">SEPETE EKLE</a> </button>
                     </div>  
                     </div>
                   </div> 
@@ -65,13 +65,43 @@ async function getProductDataDetail () {
          event.preventDefault();
         }
 
+        let commentdom = document.querySelector("#sepetPost");
+        commentdom.addEventListener("click", commentOrder);
         
+        function commentOrder(event) {
+          event.preventDefault();
+        
+          // let commentPost = document.querySelector("#comment_post_id");
+          // let commentText = document.querySelector("#post_yaz");
+          // let commentUser = document.querySelector("#comment_user_id");
+        
+          let data = {
+            // postId: commentPost.value,
+            // text: commentText.value,
+            // userId: localStorage.getItem('currentUser'),
+            dt
+          };
+        
+          fetch("http://localhost:8080/auth/v1/order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Success:", data);
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
     }
     
     renderProductDetail();
 
 
 
+   
     /* 
     
     bilgisayar: https://productimages.hepsiburada.net/s/199/1500/110000170364823.jpg

@@ -8,6 +8,7 @@ import com.blogafac.kocirfan.entity.dto.ProductDTO;
 import org.springframework.http.ResponseEntity;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 
@@ -33,5 +34,10 @@ public interface IProductService {
 
    // public  List<ProductDTO> findByUserId(String user,Long userId);
 
+    @NotNull Iterable<Product> getAllProducts();
+
     Product getProduct(@Min(value = 1L, message = "Invalid product ID.") long id);
+
+    Product save(Product product);
+
 }

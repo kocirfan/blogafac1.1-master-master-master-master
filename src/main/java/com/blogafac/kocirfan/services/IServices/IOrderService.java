@@ -6,6 +6,8 @@ import com.blogafac.kocirfan.entity.dto.CommentDTO;
 // import com.blogafac.kocirfan.entity.dto.OrderDTO;
 import org.springframework.http.ResponseEntity;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +24,9 @@ public interface IOrderService {
 //    public ResponseEntity<OrderDTO> updateOrder(Long id, OrderDTO orderDTO);
 //    public ResponseEntity<Map<String, Boolean>> deleteOrder(Long id);
 
-    Iterable<Order> getAllOrders();
+    @NotNull Iterable<Order> getAllOrders();
 
-    Order create(Order order);
+    Order create(@NotNull(message = "The order cannot be null.") @Valid Order order);
 
-    void update(Order order);
+    void update(@NotNull(message = "The order cannot be null.") @Valid Order order);
 }

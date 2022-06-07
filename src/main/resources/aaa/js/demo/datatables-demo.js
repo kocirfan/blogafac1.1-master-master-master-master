@@ -58,12 +58,6 @@ async function renderPostData() {
     }
 
 
-
-
-
-
-
-
   });
 
   let container = document.querySelector("#blog_post");

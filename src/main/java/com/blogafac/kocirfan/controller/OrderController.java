@@ -42,7 +42,7 @@ public class OrderController {
         this.orderProductService = orderProductService;
     }
 
-    @GetMapping("/orders")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public @NotNull Iterable<Order> list() {
         return this.orderService.getAllOrders();

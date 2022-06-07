@@ -77,7 +77,7 @@ async function renderProduct(event) {
                 </li>
              </ul>
 
-             <div class="mt-5"><button class="btn btn-success btn-sm"><a class="text-white"href="sepet.html">SEPETE EKLE</a> </button></div>
+             <div class="mt-5"><button class="btn btn-success btn-sm"><a class="text-white"href="${"cards.html?id=" +  product.id}">SEPETE EKLE</a> </button></div>
           </div>  
           </div>
         </div> 
