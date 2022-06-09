@@ -44,6 +44,7 @@ public class Order {
     @JsonManagedReference
     @OneToMany(mappedBy = "pk.order")
     @Valid
+    @JsonIgnore
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
     @Transient

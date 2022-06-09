@@ -49,7 +49,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Order> create(@RequestBody OrderForm form) {
+    public ResponseEntity<Order> create( @RequestBody  OrderForm form) {
         List<OrderProductDto> formDtos = form.getProductOrders();
         validateProductsExistence(formDtos);
         Order order = new Order();
@@ -76,7 +76,7 @@ public class OrderController {
         headers.add("Location", uri);
 
         return new ResponseEntity<>(order, headers, HttpStatus.CREATED);
-    }
+}
 
     private void validateProductsExistence(List<OrderProductDto> orderProducts) {
         List<OrderProductDto> list = orderProducts

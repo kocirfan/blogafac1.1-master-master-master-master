@@ -26,7 +26,7 @@ public interface IProductService {
 
     public List<ProductDTO> getAllProduct();
 
-    public Product getProductById(Long id);
+    //public Product getProductById(Long id);
 
     public ResponseEntity<ProductDTO> updateProduct(Long id, ProductDTO productDTO);
 
@@ -36,7 +36,7 @@ public interface IProductService {
 
     @NotNull Iterable<Product> getAllProducts();
 
-    Product getProduct(@Min(value = 1L, message = "Invalid product ID.") long id);
+    Product getProduct(Long id);
 
     Product save(Product product);
 

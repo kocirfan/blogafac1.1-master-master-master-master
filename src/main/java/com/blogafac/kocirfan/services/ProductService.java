@@ -89,12 +89,12 @@ public class ProductService implements IProductService {
         return listDTO;
     }
 
-    @Override
-    public Product getProductById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(NullPointerException::new);
-        ProductDTO productDTO = EntityToDto(product);
-        return product;
-    }
+//    @Override
+//    public Product getProductById(Long id) {
+//        Product product = productRepository.findById(id).orElseThrow(NullPointerException::new);
+//        ProductDTO productDTO = EntityToDto(product);
+//        return product;
+//    }
 
     @Override
     public ResponseEntity<ProductDTO> updateProduct(Long id, ProductDTO productDetails) {
@@ -123,10 +123,10 @@ public class ProductService implements IProductService {
 
     //////////////////////////////////////////////
     @Override
-    public Product getProduct(long id) {
+    public Product getProduct(Long id) {
         return productRepository
-                .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+                .findById(id).get();
+//                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
     }
 
     @Override

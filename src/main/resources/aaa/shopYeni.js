@@ -12,7 +12,7 @@ let buttonsDOM = [];
 class Products {
     async getProducts() {
         try {
-            let result = await fetch("http://localhost:8080/auth/v1/product/products?id=");
+            let result = await fetch("http://localhost:8080/auth/v1/product/products");
             let data = await result.json();
             let products = data;
             return products;
@@ -25,15 +25,19 @@ class Products {
 class UI {
     displayProducts(products) {
         let result = "";
-        
-        products.forEach(item => {
-            result += `
+        let ID = window.location.href;
+        let IS = ID.slice(-2)
+        console.log(IS)
+        products.forEach(item => {   
+            if(IS == item.id){
+                 result += `
+            <div class"row >
             <div class="col-lg-4 col-md-6">
-                <div class="product">
+                <div class="product mb-4">
                     <div class="product-image">
                         <img src="${item.image}" alt="product" class="img-fluid" />
                     </div>
-                    <div class="product-hover mt-3">
+                    <div class="product-hover mt-3 mb-4">
                         <span class="product-title">${item.name}</span>
                         <span class="product-price">$ ${item.price}</span>
                         <button class="btn-add-to-cart" data-id=${item.id}>
@@ -42,8 +46,43 @@ class UI {
                     </div>
                 </div>
             </div>
-            `});
-        productsDOM.innerHTML = result;
+            
+            </div>
+            `; productsDOM.innerHTML = result;
+            }else{
+               return null
+            }
+            
+                    let data = {item}
+
+    const basbas =  function(){
+        fetch("http://localhost:8080/auth/v1/order", {
+    method: "POST",
+    headers: {
+        "Accept": "application/json, text/plain, */*",
+         "Content-Type": "application/json" 
+        },
+
+    body: JSON.stringify(data),
+   
+    
+    
+  })
+    .then((response) => response.json())
+    .then((data) => {
+        alert(" gönderildi")
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+    }
+basbas()
+            
+            
+           
+           });
+        
     }
 
     getBagButtons() {
@@ -55,6 +94,7 @@ class UI {
             if (inCart) {
                 button.setAttribute("disabled", "disabled");
                 button.style.opacity = ".3";
+                
             } else {
                 button.addEventListener("click", event => {
                     event.target.disabled = true;
@@ -65,32 +105,47 @@ class UI {
                     cart = [...cart, cartItem];
                     //* save cart in local storage
                     Storage.saveCart(cart);
+                   
+                    
                     //* save cart values
                     this.saveCartValues(cart);
                     //* display cart item
+                   
                     this.addCartItem(cartItem)
                     //* show the cart
                     this.showCart();
                 })
             }
         })
+        console.log(Products)
+        
+
+        
+        
+        
+        
     }
 
+   
     saveCartValues(cart) {
         let tempTotal = 0;
         let itemsTotal = 0;
+       
         cart.map(item => {
             tempTotal += item.price * item.amount;
             itemsTotal += item.amount;
+             
         });
 
         cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
         cartItems.innerText = itemsTotal;
+        
     }
 
     addCartItem(item) {
         const li = document.createElement("li");
         li.classList.add("cart-list-item");
+       
         li.innerHTML = `
             <div class="cart-left">
                 <div class="cart-left-image">
@@ -106,7 +161,7 @@ class UI {
                     <button class="quantity-minus" data-id=${item.id}>
                         <i class="fas fa-minus"></i>
                     </button>
-                    <span class="quantity">${item.amount}</span>
+                    <span class="quantity">${item.quantity}</span>
                     <button class="quantity-plus" data-id=${item.id}>
                         <i class="fas fa-plus"></i>
                     </button>
@@ -129,15 +184,18 @@ class UI {
         cart = Storage.getCart();
         this.saveCartValues(cart);
         this.populateCart(cart);
+        
     }
 
     populateCart(cart) {
         cart.forEach(item => this.addCartItem(item));
+       
     }
 
     cartLogic() {
         clearCartBtn.addEventListener("click", () => {
             this.clearCart();
+
         })
 
         cartContent.addEventListener("click", event => {
@@ -170,7 +228,7 @@ class UI {
             }
         })
     }
-
+    
 
     clearCart() {
         let cartItems = cart.map(item => item.id);
@@ -179,7 +237,6 @@ class UI {
             cartContent.removeChild(cartContent.children[0])
         }
     }
-
     removeItem(id) {
         cart = cart.filter(item => item.id !== id);
         this.saveCartValues(cart);
@@ -210,7 +267,10 @@ class Storage {
 
     static getCart() {
         return localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+    
     }
+
+    
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -218,12 +278,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const products = new Products();
 
     ui.setupAPP();
-
+    
     products.getProducts().then(products => {
         ui.displayProducts(products);
         Storage.saveProducts(products);
+        
     }).then(() => {
         ui.getBagButtons();
         ui.cartLogic();
     })
 });
+ 
